@@ -10,7 +10,7 @@ Features
 
 Status
 ------
-- Safari: `UNDER DEVELOPMENT`
+- Safari: `UNDER DEVELOPMENT` (v1.2.1)
 - Chrome: `TO DO`
 
 Contributors & pull requests welcome.
