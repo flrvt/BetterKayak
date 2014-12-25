@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Flor Holvoet</string>
+	<key>Builder Version</key>
+	<string>10600.2.5</string>
+	<key>CFBundleDisplayName</key>
+	<string>Better Kayak</string>
+	<key>CFBundleIdentifier</key>
+	<string>be.florholvoet.betterkayak</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.2.1</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>Global.html</string>
+		<key>Menus</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>better-kayak-main-menu</string>
+				<key>Menu Items</key>
+				<array>
+					<dict>
+						<key>Checked State</key>
+						<real>-1</real>
+						<key>Identifier</key>
+						<string>better-kayak-preferred-alliance</string>
+						<key>Submenu</key>
+						<string>better-kayak-alliances</string>
+						<key>Title</key>
+						<string>Set Preferred Alliance</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>open-kayak</string>
+						<key>Identifier</key>
+						<string></string>
+						<key>Separator</key>
+						<true/>
+						<key>Title</key>
+						<string>Open Kayak.com</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>new-session</string>
+						<key>Identifier</key>
+						<string>better-kayak-new-session</string>
+						<key>Separator</key>
+						<false/>
+						<key>Title</key>
+						<string>New Session</string>
+					</dict>
+					<dict>
+						<key>Checked State</key>
+						<real>0.0</real>
+						<key>Command</key>
+						<string>repeat-search</string>
+						<key>Disabled</key>
+						<true/>
+						<key>Identifier</key>
+						<string>better-kayak-repeat-search</string>
+						<key>Title</key>
+						<string>Repeat this search</string>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>Identifier</key>
+				<string>better-kayak-alliances</string>
+				<key>Menu Items</key>
+				<array>
+					<dict>
+						<key>Checked State</key>
+						<real>0.0</real>
+						<key>Command</key>
+						<string>set-pref-alliance-all</string>
+						<key>Identifier</key>
+						<string>undefined</string>
+						<key>Title</key>
+						<string>Show All</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>set-pref-alliance-one</string>
+						<key>Identifier</key>
+						<string>ONE_WORLD</string>
+						<key>Title</key>
+						<string>oneworld</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>set-pref-alliance-sky</string>
+						<key>Identifier</key>
+						<string>SKY_TEAM</string>
+						<key>Title</key>
+						<string>SkyTeam</string>
+					</dict>
+					<dict>
+						<key>Command</key>
+						<string>set-pref-alliance-star</string>
+						<key>Identifier</key>
+						<string>STAR_ALLIANCE</string>
+						<key>Title</key>
+						<string>Star Alliance</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string></string>
+				<key>Identifier</key>
+				<string>better-kayak-toolbar</string>
+				<key>Image</key>
+				<string>Icon-64.png</string>
+				<key>Label</key>
+				<string>Better Kayak</string>
+				<key>Menu</key>
+				<string>better-kayak-main-menu</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>ApplyPref.js</string>
+			</array>
+			<key>Start</key>
+			<array>
+				<string>arrive-2.0.0.min.js</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Improvements to the Kayak Flight Search</string>
+	<key>DeveloperIdentifier</key>
+	<string>23BLW5JS3L</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Allowed Domains</key>
+			<array>
+				<string>*.kayak.com</string>
+				<string>*.kayak.ie</string>
+				<string>*.kayak.nl</string>
+				<string>*.kayak.pt</string>
+				<string>*.kayak.es</string>
+				<string>*.kayak.co.uk</string>
+				<string>*.kayak.se</string>
+			</array>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>Some</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>http://www.florholvoet.be</string>
+</dict>
+</plist>

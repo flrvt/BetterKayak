@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>global HTML page</title>
+<script type="text/javascript">
+safari.application.addEventListener('message',handleMessage,false);
+safari.application.addEventListener("command",performCommand,false);
+safari.application.addEventListener("validate",validateHandler,false);
+
+var pref = safari.extension.settings.pref;
+var sites = safari.extension.settings.sites;
+var kayakTabs=[];
+
+
+function openTab(url) {
+  var tab = safari.application.activeBrowserWindow.openTab();
+  tab.url = url;
+  tab.activate();
+}
+
+function closeAllKayakTabs(){
+    for(var i=0; i < kayakTabs.length; ++i){
+        kayakTabs[i].close();
+    }
+}
+
+function repeatSearch(q){
+    var tlds = sites.split(","); 
+    for(var i=0; i < tlds.length; ++i){
+        var url = safari.application.activeBrowserWindow.activeTab.url;
+        if(url.search("kayak." + tlds[i]) < 0){
+            openTab("http://www.kayak."+tlds[i]+"/flights"+q);
+        }
+    }
+}
+
+function validateHandler(e){
+    var item = e.target.identifier;
+
+    if(item === pref){
+        e.target.checkedState = "CHECKED";
+    }else{
+        e.target.checkedState = "UNCHECKED";
+    }
+
+    if(item === "better-kayak-repeat-search"){
+        if(!!safari.application.activeBrowserWindow.activeTab.url){
+            if(safari.application.activeBrowserWindow.activeTab.url.search(/flights/i) > 0){
+                e.target.disabled = false;
+            }
+        }else{
+            e.target.disabled = true;
+        }
+    }
+}
+
+
+function changePref(){
+    safari.extension.settings.pref = pref;
+
+    for(var i=0; i < kayakTabs.length; ++i){
+        kayakTabs[i].page.dispatchMessage('changePref', pref);
+    }
+}
+
+function handleMessage(e) {
+    if(e.name === 'getPref') {
+        e.target.page.dispatchMessage('setPref', pref);
+        kayakTabs.push(e.target);
+        console.log(e.target);
+    }
+}
+
+function performCommand(e) {
+    if (e.command == "new-session") {
+        closeAllKayakTabs();
+        kayakTabs=[];
+        openTab("http://www.kayak.com");
+    }
+    if (e.command == "set-pref-alliance-star") {
+        if(pref != "STAR_ALLIANCE"){
+            pref = "STAR_ALLIANCE";
+            changePref();
+        }
+    }
+    if (e.command == "set-pref-alliance-one") {
+        if(pref != "ONE_WORLD"){
+            pref = "ONE_WORLD";
+            changePref();
+        }
+    }
+    if (e.command == "set-pref-alliance-sky") {
+        if(pref != "SKY_TEAM"){
+            pref = "SKY_TEAM";
+            changePref();
+        }
+    }
+    if (e.command == "set-pref-alliance-all") {
+        if(pref != undefined){
+            pref = undefined;
+            changePref();
+        }
+    }
+    if (e.command == "repeat-search"){
+        var url = safari.application.activeBrowserWindow.activeTab.url;
+        var searchQueryStart = url.search(/flights/i) + 7;
+        var query = url.substring(searchQueryStart);
+        console.log(query);
+        repeatSearch(query);
+    }
+}
+
+ 
+
+</script>
+</head>
+<body>
+</body>
+</html>

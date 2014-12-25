@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>DefaultValue</key>
+		<string>com,co.uk,ie,pt,es,nl,se</string>
+		<key>Key</key>
+		<string>sites</string>
+		<key>Title</key>
+		<string>Comma-seperated list of sites</string>
+		<key>Titles</key>
+		<array>
+			<string>United States</string>
+			<string>United Kingdom</string>
+			<string>The Netherlands</string>
+			<string>Spain</string>
+			<string>Ireland</string>
+			<string>Sweden</string>
+			<string>Portugal</string>
+		</array>
+		<key>Type</key>
+		<string>TextField</string>
+		<key>Values</key>
+		<array>
+			<string>com</string>
+			<string>co.uk</string>
+			<string>nl</string>
+			<string>es</string>
+			<string>ie</string>
+			<string>se</string>
+			<string>pt</string>
+		</array>
+	</dict>
+</array>
+</plist>
