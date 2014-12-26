@@ -7,7 +7,7 @@ safari.application.addEventListener('message',handleMessage,false);
 safari.application.addEventListener("command",performCommand,false);
 safari.application.addEventListener("validate",validateHandler,false);
 
-var pref = safari.extension.settings.pref;
+var prefAlliance = safari.extension.settings.prefAlliance;
 var sites = safari.extension.settings.sites;
 var kayakTabs=[];
 
@@ -37,10 +37,13 @@ function repeatSearch(q){
 function validateHandler(e){
     var item = e.target.identifier;
 
-    if(item === pref){
-        e.target.checkedState = "CHECKED";
+    if(item == prefAlliance){
+        e.target.checkedState = 1;
     }else{
-        e.target.checkedState = "UNCHECKED";
+        e.target.checkedState = 0;
+    }
+    if(item == "undefined" && prefAlliance == undefined){
+        e.target.checkedState = 1;
     }
 
     if(item === "better-kayak-repeat-search"){
@@ -55,19 +58,22 @@ function validateHandler(e){
 }
 
 
-function changePref(){
-    safari.extension.settings.pref = pref;
+function changePrefAlliance(p){
+    if(prefAlliance != p){
+        prefAlliance = p;
 
-    for(var i=0; i < kayakTabs.length; ++i){
-        kayakTabs[i].page.dispatchMessage('changePref', pref);
+        safari.extension.settings.prefAlliance = p;
+
+        for(var i=0; i < kayakTabs.length; ++i){
+            kayakTabs[i].page.dispatchMessage('changePrefAlliance', p);
+        }
     }
 }
 
 function handleMessage(e) {
-    if(e.name === 'getPref') {
-        e.target.page.dispatchMessage('setPref', pref);
+    if(e.name === 'getPrefAlliance') {
+        e.target.page.dispatchMessage('setPrefAlliance', prefAlliance);
         kayakTabs.push(e.target);
-        console.log(e.target);
     }
 }
 
@@ -78,28 +84,16 @@ function performCommand(e) {
         openTab("http://www.kayak.com");
     }
     if (e.command == "set-pref-alliance-star") {
-        if(pref != "STAR_ALLIANCE"){
-            pref = "STAR_ALLIANCE";
-            changePref();
-        }
+        changePrefAlliance("STAR_ALLIANCE");
     }
     if (e.command == "set-pref-alliance-one") {
-        if(pref != "ONE_WORLD"){
-            pref = "ONE_WORLD";
-            changePref();
-        }
+        changePrefAlliance("ONE_WORLD");
     }
     if (e.command == "set-pref-alliance-sky") {
-        if(pref != "SKY_TEAM"){
-            pref = "SKY_TEAM";
-            changePref();
-        }
+        changePrefAlliance("SKY_TEAM");
     }
     if (e.command == "set-pref-alliance-all") {
-        if(pref != undefined){
-            pref = undefined;
-            changePref();
-        }
+        changePrefAlliance(undefined);
     }
     if (e.command == "repeat-search"){
         var url = safari.application.activeBrowserWindow.activeTab.url;

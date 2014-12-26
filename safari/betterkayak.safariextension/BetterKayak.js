@@ -1,8 +1,7 @@
 safari.self.addEventListener('message', handleMessage, false);
-safari.self.tab.dispatchMessage('getPref', 'pref');
-console.log("asked pref");
+safari.self.tab.dispatchMessage('getPrefAlliance', 'prefAlliance');
 
-var pref;
+var prefAlliance;
 
 function setAlliance(a){
 	if(a != undefined){
@@ -13,23 +12,21 @@ function setAlliance(a){
 		var id = "fs_airlines_reset";
 	}
     document.getElementById(id).click();
-    //console.log("KAYAK EXTENSION: Alliance set to " + a);
 }
 
 
 function handleMessage(msg) {
-    if (msg.name === 'setPref') {
-    	console.log('received pref');
-        pref = msg.message;
+    if (msg.name === 'setPrefAlliance') {
+        prefAlliance = msg.message;
 		document.arrive(".flightAirlinesFilterGroupContentAlliances", function() {
-			setAlliance(pref);
+			setAlliance(prefAlliance);
 			document.unbindArrive();
 		});
 	}
-	if (msg.name === 'changePref') {
-        pref = msg.message;
+	if (msg.name === 'changePrefAlliance') {
+        prefAlliance = msg.message;
 		if(!!document.getElementsByClassName("flightAirlinesFilterGroupContentAlliances").length) {
-			setAlliance(pref);
+			setAlliance(prefAlliance);
 		}
     }
 }
